@@ -1,10 +1,10 @@
 {
     "name": "php-etl/array-expression-language",
-    "description": "",
+    "description": "This library implements functions for manipulating array data in ExpressionLanguage",
     "type": "library",
     "require": {
-        "php": "^8.0",
-        "symfony/expression-language": "5.x-dev"
+        "php": ">=8.0",
+        "symfony/expression-language": "^5.2"
     },
     "license": "MIT",
     "authors": [
