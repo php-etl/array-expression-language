@@ -10,7 +10,7 @@ class ArrayExpressionLanguageProvider implements ExpressionFunctionProviderInter
     public function getFunctions(): array
     {
         return array(
-            ExpressionFunction::fromPhp('implode')
+            ExpressionFunction::fromPhp('implode', 'join')
         );
     }
 }
