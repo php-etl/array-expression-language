@@ -11,7 +11,8 @@ class ArrayExpressionLanguageProvider implements ExpressionFunctionProviderInter
     {
         return [
             ExpressionFunction::fromPhp('implode', 'join'),
-            ExpressionFunction::fromPhp('array_key_first')
+            ExpressionFunction::fromPhp('array_key_first', 'firstKey'),
+            ExpressionFunction::fromPhp('array_key_last', 'lastKey')
         ];
     }
 }
