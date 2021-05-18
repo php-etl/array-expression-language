@@ -13,7 +13,9 @@ class ArrayExpressionLanguageProvider implements ExpressionFunctionProviderInter
             ExpressionFunction::fromPhp('array_key_first', 'firstKey'),
             ExpressionFunction::fromPhp('array_key_last', 'lastKey'),
             new Reduce('reduce'),
-            new Join('join')
+            new Join('join'),
+            new Map('map'),
+            new SearchData('searchData'),
         ];
     }
 }
