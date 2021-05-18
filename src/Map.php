@@ -18,18 +18,20 @@ class Map extends ExpressionFunction
     private function compile(string $callback, string $iterator): string
     {
         $pattern = <<<"PATTERN"
-foreach (%s as \$i) {
-    yield %s(\$i);
-}
+(function() {
+    foreach (%s as \$item) {
+        yield %s(\$item);
+    }
+})()
 PATTERN;
 
         return sprintf($pattern, $iterator, $callback);
     }
 
-    public function evaluate(array $context, callable $callback, iterable $iterator): \Generator
+    private function evaluate(array $context, callable $callback, iterable $iterator): \Generator
     {
-        foreach ($iterator as $i) {
-            yield $callback($i);
+        foreach ($iterator as $item) {
+            yield $callback($item);
         }
     }
 }

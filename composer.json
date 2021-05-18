@@ -4,7 +4,8 @@
     "type": "library",
     "require": {
         "php": ">=8.0",
-        "symfony/expression-language": "^5.2"
+        "symfony/expression-language": "^5.2",
+        "symfony/property-access": "5.x-dev"
     },
     "license": "MIT",
     "authors": [

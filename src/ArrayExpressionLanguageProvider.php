@@ -15,7 +15,7 @@ class ArrayExpressionLanguageProvider implements ExpressionFunctionProviderInter
             new Reduce('reduce'),
             new Join('join'),
             new Map('map'),
-            new SearchData('searchData'),
+            new ExtractData('extractData'),
         ];
     }
 }

@@ -3,8 +3,9 @@
 namespace Kiboko\Component\ArrayExpressionLanguage;
 
 use Symfony\Component\ExpressionLanguage\ExpressionFunction;
+use Symfony\Component\PropertyAccess\PropertyAccess;
 
-class SearchData extends ExpressionFunction
+class ExtractData extends ExpressionFunction
 {
     public function __construct($name)
     {
@@ -18,18 +19,18 @@ class SearchData extends ExpressionFunction
     private function compile(string $path): string
     {
         $pattern = <<<"PATTERN"
-function (\$array) use (\$path) {
-    return \$array["%s"];
-}
+\Symfony\Component\PropertyAccess\PropertyAccess::createPropertyAccessor()->getValue(\$item, %s);
 PATTERN;
 
         return sprintf($pattern, $path);
     }
 
-    function evaluate(array $context, string $path): \Closure
+    private function evaluate(array $context, string $path): \Closure
     {
-        return function ($array) use ($path) {
-            return $array[$path];
+        $propertyAccessor = PropertyAccess::createPropertyAccessor();
+
+        return function ($item) use ($path, $propertyAccessor) {
+            return $propertyAccessor->getValue($item, $path);
         };
     }
 }
