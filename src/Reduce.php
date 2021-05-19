@@ -15,10 +15,10 @@ final class Reduce extends ExpressionFunction
         );
     }
 
-    private function compile(string $iterator, string $callback)
+    private function compile(string $iterator, string $callback, string $option = null)
     {
         $pattern =<<<"PATTERN"
-(function() use (\$input) {
+(function() use (\$input, %s) {
     \$value = null;
     foreach (%s as \$item) {
         \$value = (%s)(\$item, \$value);
@@ -28,7 +28,7 @@ final class Reduce extends ExpressionFunction
 })()
 PATTERN;
 
-        return sprintf($pattern, $iterator, $callback);
+        return sprintf($pattern, $option, $iterator, $callback);
     }
 
     private function evaluate(array $context, iterable $iterator, callable $callback)
