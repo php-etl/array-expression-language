@@ -5,7 +5,7 @@
     "require": {
         "php": ">=8.0",
         "symfony/expression-language": "^5.2",
-        "symfony/property-access": "5.x-dev"
+        "symfony/property-access": "^5.2"
     },
     "license": "MIT",
     "authors": [
