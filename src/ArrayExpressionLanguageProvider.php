@@ -16,6 +16,7 @@ class ArrayExpressionLanguageProvider implements ExpressionFunctionProviderInter
             ExpressionFunction::fromPhp('array_merge', 'merge'),
             ExpressionFunction::fromPhp('count', 'count'),
             ExpressionFunction::fromPhp('array_combine', 'combine'),
+            ExpressionFunction::fromPhp('iterator_to_array', 'iterableToArray'),
             new Reduce('reduce'),
             new Join('join'),
             new Map('map'),
