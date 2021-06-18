@@ -93,4 +93,28 @@ class ArrayExpressionLanguageProviderTest extends TestCase
             $interpreter->evaluate('iterableToArray(input)', ['input' => $input])
         );
     }
+
+    public function testExtractDataExpression(): void
+    {
+        $input = [
+            'first_name' => 'Wouter',
+            'lastName' => 'de Jond',
+        ];
+
+        $interpreter = new ExpressionLanguage(null, [new ArrayExpressionLanguageProvider()]);
+
+        $this->assertEquals($input["first_name"], $interpreter->evaluate('extractData("[first_name]")')($input));
+    }
+
+    public function testJoinExpression(): void
+    {
+        $input = [
+            'first_name' => 'Wouter',
+            'lastName' => 'de Jond',
+        ];
+
+        $interpreter = new ExpressionLanguage(null, [new ArrayExpressionLanguageProvider()]);
+
+        $this->assertEquals($input["lastName"].','.$input["first_name"], $interpreter->evaluate('join(",")')($input["first_name"], $input["lastName"]));
+    }
 }
