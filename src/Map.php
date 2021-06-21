@@ -20,7 +20,7 @@ class Map extends ExpressionFunction
         $pattern = <<<"PATTERN"
 (function() use(%1\$s) {
     foreach (%s as \$item) {
-        yield %s(\$item);
+        yield %s;
     }
 })()
 PATTERN;
