@@ -9,8 +9,19 @@ class ArrayExpressionLanguageProvider implements ExpressionFunctionProviderInter
 {
     public function getFunctions(): array
     {
-        return array(
-            ExpressionFunction::fromPhp('implode', 'join')
-        );
+        return [
+            ExpressionFunction::fromPhp('array_key_first', 'firstKey'),
+            ExpressionFunction::fromPhp('array_key_last', 'lastKey'),
+            ExpressionFunction::fromPhp('array_key_exists', 'keyExists'),
+            ExpressionFunction::fromPhp('array_merge', 'merge'),
+            ExpressionFunction::fromPhp('count', 'count'),
+            ExpressionFunction::fromPhp('array_combine', 'combine'),
+            ExpressionFunction::fromPhp('iterator_to_array', 'iterableToArray'),
+            new Reduce('reduce'),
+            new Join('join'),
+            new Map('map'),
+            new ExtractData('extractData'),
+            new List_('list'),
+        ];
     }
 }
