@@ -17,24 +17,24 @@ class ArrayFilter extends ExpressionFunction
         );
     }
 
-    private function compile(array|\Traversable $item): string
+    private function compile(array|\Traversable $item, ?callable $callback): string
     {
         $pattern = <<<"PATTERN"
         if(!is_array(\$item)) {
-            return iterator_to_array(\$item);
+            \$item = iterator_to_array(\$item, true);
         }
-        return \$item
+        return array_filter(\$item, \$callback)
     }
 PATTERN;
 
         return sprintf($pattern, $item);
     }
 
-    private function evaluate(array $context, array|\Traversable $item): array
+    private function evaluate(array $context, array|\Traversable $item, ?callable $callback): array
     {
-        if(!is_array($item)) {
-        return iterator_to_array($item);
+        if (!is_array($item)) {
+            $item = iterator_to_array($item, true);
         }
-        return $item;
+        return array_filter($item, $callback);
     }
 }

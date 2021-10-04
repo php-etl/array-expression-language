@@ -115,21 +115,47 @@ class ArrayExpressionLanguageProviderTest extends TestCase
 
         $interpreter = new ExpressionLanguage(null, [new ArrayExpressionLanguageProvider()]);
 
-        $this->assertEquals($input["lastName"].','.$input["first_name"], $interpreter->evaluate('join(",")')($input["first_name"], $input["lastName"]));
+        $this->assertEquals($input["lastName"] . ',' . $input["first_name"],
+            $interpreter->evaluate('join(",")')($input["first_name"], $input["lastName"]));
     }
 
-    public function testArrayFilterExpression(): void
+    public function testArrayFilterExpressionWithEmptyCallback(): void
     {
         $input = [
+            'mew' => 'two',
+            'tor' => 'tank',
+            'empty' => null
+        ];
+        $expected = [
             'mew' => 'two',
             'tor' => 'tank',
         ];
 
         $interpreter = new ExpressionLanguage(null, [new ArrayExpressionLanguageProvider()]);
 
-        $this->assertEquals($input, $interpreter->evaluate('arrayFilter(input)', ['input' => $input]));
+        $this->assertEquals($expected, $interpreter->evaluate('arrayFilter(input,null)', ['input' => $input]));
+    }
+
+    public function testArrayFilterExpressionWithCallback(): void
+    {
+        $input = [
+            'mew' => 10,
+            'tor' => 20,
+            'dracau' => 50
+        ];
+        $expected = [
+            'tor' => 20,
+            'dracau' => 50
+        ];
+
+        $interpreter = new ExpressionLanguage(null, [new ArrayExpressionLanguageProvider()]);
+
+        $callback = function ($item) {
+            return $item > 10;
+        };
 
         $iterator = new \ArrayIterator($input);
-        $this->assertEquals($input, $interpreter->evaluate('arrayFilter(input)', ['input' => $iterator]));
+        $this->assertEquals($expected,
+            $interpreter->evaluate('arrayFilter(input,callback)', ['input' => $iterator, 'callback' => $callback]));
     }
 }
