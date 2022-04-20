@@ -24,6 +24,7 @@ foo: '@=count(input["myArray"])'
 * `map(callable $callback, iterable $source) : iterable`
 * `reduce(callable $callback, iterable $source) : string`
 * `list(int $length, mixed $value) : iterable`
+* `arrayFilter(array $array, ?callable $callback = null) : array`
 
 ## Functions that can be used with `reduce`
 
@@ -32,3 +33,8 @@ foo: '@=count(input["myArray"])'
 ## Functions that can be used with `map`
 
 * `extraxctData(string $path) : callable`
+
+## Functions that can be used with `arrayFilter`
+
+* `reduce(callable $callback, iterable $source) : string` 
+* `map(callable $callback, iterable $source) : iterable` 
