@@ -36,5 +36,4 @@ foo: '@=count(input["myArray"])'
 
 ## Functions that can be used with `arrayFilter`
 
-* `reduce(callable $callback, iterable $source) : string` 
-* `map(callable $callback, iterable $source) : iterable` 
+Any function can be used with this method as long as it returns true or false.
