@@ -22,6 +22,7 @@ class ArrayExpressionLanguageProvider implements ExpressionFunctionProviderInter
             new Map('map'),
             new ExtractData('extractData'),
             new List_('list'),
+            new FilterList('filterList'),
         ];
     }
 }
