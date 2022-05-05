@@ -18,7 +18,7 @@ final class FilterList extends ExpressionFunction
     private function compile(string $iterator, string $callback): string
     {
         return <<<PHP
-        (function (){
+        (function () use(\$input) {
             \$iterator = $iterator;
             \$callback = $callback ?? fn (\$item) => !!\$item;
             
