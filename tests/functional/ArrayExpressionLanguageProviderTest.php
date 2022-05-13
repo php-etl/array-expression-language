@@ -118,9 +118,9 @@ class ArrayExpressionLanguageProviderTest extends TestCase
         $this->assertEquals($input["lastName"] . ',' . $input["first_name"], $interpreter->evaluate('join(",")')($input["first_name"], $input["lastName"]));
     }
 
-    public function testArrayFilterExpression(): void
+    public function testFilterListExpression(): void
     {
-        $input = [1, 2, 3, 4, 5];
+        $input = new \ArrayIterator([1, 2, 3, 4, 5]);
 
         $callback = static function ($var) {
             return !($var & 1);
@@ -129,11 +129,8 @@ class ArrayExpressionLanguageProviderTest extends TestCase
         $interpreter = new ExpressionLanguage(null, [new ArrayExpressionLanguageProvider()]);
 
         $this->assertEquals(
-            [
-                1 => 2,
-                3 => 4
-            ],
-            $interpreter->evaluate('arrayFilter(input, callback)',
+            new \CallbackFilterIterator($input, $callback),
+            $interpreter->evaluate('filterList(input, callback)',
                 [
                     'input' => $input,
                     'callback' => $callback
