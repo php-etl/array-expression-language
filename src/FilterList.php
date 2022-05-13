@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Kiboko\Component\ArrayExpressionLanguage;
 
@@ -37,7 +39,7 @@ final class FilterList extends ExpressionFunction
     {
         if ($iterator instanceof \IteratorAggregate) {
             $iterator = new \IteratorIterator($iterator);
-        } else if (is_array($iterator)) {
+        } elseif (is_array($iterator)) {
             $iterator = new \ArrayIterator($iterator);
         }
 
