@@ -12,16 +12,16 @@ final class List_ extends ExpressionFunction
     {
         parent::__construct(
             $name,
-            \Closure::fromCallable([$this, 'compile'])->bindTo($this),
-            \Closure::fromCallable([$this, 'evaluate'])->bindTo($this)
+            $this->compile(...)->bindTo($this),
+            $this->evaluate(...)->bindTo($this)
         );
     }
 
     private function compile(string $length, string $value)
     {
-        $pattern =<<<"PATTERN"
-array_fill(0, %s, %s)
-PATTERN;
+        $pattern = <<<'PATTERN'
+            array_fill(0, %s, %s)
+            PATTERN;
 
         return sprintf($pattern, $length, $value);
     }
