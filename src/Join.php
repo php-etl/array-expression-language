@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Kiboko\Component\ArrayExpressionLanguage;
 
@@ -10,26 +12,26 @@ final class Join extends ExpressionFunction
     {
         parent::__construct(
             $name,
-            \Closure::fromCallable([$this, 'compile'])->bindTo($this),
-            \Closure::fromCallable([$this, 'evaluate'])->bindTo($this)
+            $this->compile(...)->bindTo($this),
+            $this->evaluate(...)->bindTo($this)
         );
     }
 
     private function compile(string $separator)
     {
-        $pattern =<<<"PATTERN"
-function (\$item, \$value) {
-    if (null === \$item) {
-        throw new \InvalidArgumentException('Item must not be null');
-    }
+        $pattern = <<<'PATTERN'
+            function ($item, $value) {
+                if (null === $item) {
+                    throw new \InvalidArgumentException('Item must not be null');
+                }
 
-    if (null === \$value) {
-        return \$item;
-    }
+                if (null === $value) {
+                    return $item;
+                }
 
-    return \$value . %s . \$item;
-}
-PATTERN;
+                return $value . %s . $item;
+            }
+            PATTERN;
 
         return sprintf($pattern, $separator);
     }
@@ -45,7 +47,7 @@ PATTERN;
                 return $item;
             }
 
-            return $value . $separator . $item;
+            return $value.$separator.$item;
         };
     }
 }

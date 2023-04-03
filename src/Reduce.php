@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Kiboko\Component\ArrayExpressionLanguage;
 
@@ -10,23 +12,23 @@ final class Reduce extends ExpressionFunction
     {
         parent::__construct(
             $name,
-            \Closure::fromCallable([$this, 'compile'])->bindTo($this),
-            \Closure::fromCallable([$this, 'evaluate'])->bindTo($this)
+            $this->compile(...)->bindTo($this),
+            $this->evaluate(...)->bindTo($this)
         );
     }
 
     private function compile(string $iterator, string $callback, string $option = null)
     {
-        $pattern =<<<"PATTERN"
-(function() use (\$input, %s) {
-    \$value = null;
-    foreach (%s as \$item) {
-        \$value = (%s)(\$item, \$value);
-    }
-    
-    return \$value;
-})()
-PATTERN;
+        $pattern = <<<'PATTERN'
+            (function() use ($input, %s) {
+                $value = null;
+                foreach (%s as $item) {
+                    $value = (%s)($item, $value);
+                }
+                
+                return $value;
+            })()
+            PATTERN;
 
         return sprintf($pattern, $option, $iterator, $callback);
     }
@@ -37,7 +39,7 @@ PATTERN;
         foreach ($iterator as $item) {
             $value = $callback($item, $value);
         }
-        
+
         return $value;
     }
 }

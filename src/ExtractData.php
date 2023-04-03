@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kiboko\Component\ArrayExpressionLanguage;
 
 use Symfony\Component\ExpressionLanguage\ExpressionFunction;
@@ -11,16 +13,16 @@ class ExtractData extends ExpressionFunction
     {
         parent::__construct(
             $name,
-            \Closure::fromCallable([$this, 'compile'])->bindTo($this),
-            \Closure::fromCallable([$this, 'evaluate'])->bindTo($this)
+            $this->compile(...)->bindTo($this),
+            $this->evaluate(...)->bindTo($this)
         );
     }
 
     private function compile(string $path): string
     {
-        $pattern = <<<"PATTERN"
-\Symfony\Component\PropertyAccess\PropertyAccess::createPropertyAccessor()->getValue(\$item, %s);
-PATTERN;
+        $pattern = <<<'PATTERN'
+            \Symfony\Component\PropertyAccess\PropertyAccess::createPropertyAccessor()->getValue($item, %s);
+            PATTERN;
 
         return sprintf($pattern, $path);
     }
@@ -29,8 +31,6 @@ PATTERN;
     {
         $propertyAccessor = PropertyAccess::createPropertyAccessor();
 
-        return function ($item) use ($path, $propertyAccessor) {
-            return $propertyAccessor->getValue($item, $path);
-        };
+        return fn ($item) => $propertyAccessor->getValue($item, $path);
     }
 }

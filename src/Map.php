@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kiboko\Component\ArrayExpressionLanguage;
 
 use Symfony\Component\ExpressionLanguage\ExpressionFunction;
@@ -10,20 +12,20 @@ class Map extends ExpressionFunction
     {
         parent::__construct(
             $name,
-            \Closure::fromCallable([$this, 'compile'])->bindTo($this),
-            \Closure::fromCallable([$this, 'evaluate'])->bindTo($this)
+            $this->compile(...)->bindTo($this),
+            $this->evaluate(...)->bindTo($this)
         );
     }
 
     private function compile(string $callback, string $iterator): string
     {
-        $pattern = <<<"PATTERN"
-(function() use(%1\$s) {
-    foreach (%s as \$item) {
-        yield %s(\$item);
-    }
-})()
-PATTERN;
+        $pattern = <<<'PATTERN'
+            (function() use(%1$s) {
+                foreach (%s as $item) {
+                    yield %s($item);
+                }
+            })()
+            PATTERN;
 
         return sprintf($pattern, $iterator, $callback);
     }
