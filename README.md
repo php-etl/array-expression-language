@@ -49,6 +49,7 @@ List of available functions
 * `reduce(callable $callback, iterable $source) : string`
 * `list(int $length, mixed $value) : iterable`
 * `arrayFilter(array $array, ?callable $callback = null) : array`
+* `mapValues(array $input, iterable $values) : array`
 
 #### Functions that can be used with `reduce`
 
