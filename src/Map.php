@@ -20,11 +20,11 @@ class Map extends ExpressionFunction
     private function compile(string $callback, string $iterator): string
     {
         $pattern = <<<'PATTERN'
-            (function() use(%1$s) {
-                foreach (%s as $item) {
-                    yield %s($item);
+            (function($source) {
+                foreach ($source as $item) {
+                    yield (%2$s)($item);
                 }
-            })()
+            })(%1$s)
             PATTERN;
 
         return sprintf($pattern, $iterator, $callback);

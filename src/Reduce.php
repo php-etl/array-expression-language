@@ -17,25 +17,25 @@ final class Reduce extends ExpressionFunction
         );
     }
 
-    private function compile(string $iterator, string $callback, string $option = null)
+    private function compile(string $iterator, string $callback, string $seed = 'null')
     {
         $pattern = <<<'PATTERN'
-            (function() use ($input, %s) {
-                $value = null;
-                foreach (%s as $item) {
-                    $value = (%s)($item, $value);
+            (function($source) use ($input) {
+                $value = %3$s;
+                foreach ($source as $item) {
+                    $value = (%2$s)($item, $value);
                 }
                 
                 return $value;
-            })()
+            })(%1$s)
             PATTERN;
 
-        return sprintf($pattern, $option, $iterator, $callback);
+        return sprintf($pattern, $iterator, $callback, $seed);
     }
 
-    private function evaluate(array $context, iterable $iterator, callable $callback)
+    private function evaluate(array $context, iterable $iterator, callable $callback, mixed $seed)
     {
-        $value = null;
+        $value = $seed;
         foreach ($iterator as $item) {
             $value = $callback($item, $value);
         }
