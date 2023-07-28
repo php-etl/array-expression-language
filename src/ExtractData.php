@@ -21,7 +21,7 @@ class ExtractData extends ExpressionFunction
     private function compile(string $path): string
     {
         $pattern = <<<'PATTERN'
-            \Symfony\Component\PropertyAccess\PropertyAccess::createPropertyAccessor()->getValue($item, %s);
+            fn ($item) => \Symfony\Component\PropertyAccess\PropertyAccess::createPropertyAccessor()->getValue($item, %s)
             PATTERN;
 
         return sprintf($pattern, $path);
