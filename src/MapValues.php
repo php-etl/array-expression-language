@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Kiboko\Component\ArrayExpressionLanguage;
 
+use Kiboko\Contract\Pipeline\RejectedItemException;
 use Symfony\Component\ExpressionLanguage\ExpressionFunction;
 
 class MapValues extends ExpressionFunction
@@ -36,7 +37,7 @@ class MapValues extends ExpressionFunction
                         preg_match(\$pattern, (string) \$input, \$matches);
 
                         if (empty(\$matches)) {
-                            throw new \Exception(sprintf(
+                            throw new Kiboko\Contract\Pipeline\RejectedItemException(sprintf(
                             'No replacement found for value "%s". Expected values: %s',
                              \$input,
                               implode(', ', array_keys(\$replacements))
@@ -70,7 +71,7 @@ class MapValues extends ExpressionFunction
                 preg_match($pattern, (string) $input, $matches);
 
                 if (empty($matches)) {
-                    throw new \Exception(sprintf(
+                    throw new RejectedItemException(sprintf(
                     'No replacement found for value "%s". Expected values: %s',
                      $input,
                       implode(', ', array_keys($replacements))

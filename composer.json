@@ -12,7 +12,8 @@
         "phpstan/phpstan": "^1.10",
         "friendsofphp/php-cs-fixer": "^3.0",
         "infection/infection": "^0.26.18",
-        "rector/rector": "^0.15"
+        "rector/rector": "^0.15",
+        "php-etl/satellite": "^0.6.7"
     },
     "license": "MIT",
     "authors": [
@@ -41,7 +42,8 @@
     "config": {
         "bin-dir": "bin",
         "allow-plugins": {
-            "infection/extension-installer": true
+            "infection/extension-installer": true,
+            "php-http/discovery": true
         }
     }
 }
