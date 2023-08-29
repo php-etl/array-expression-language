@@ -40,7 +40,7 @@ class MapValues extends ExpressionFunction
                             throw new Kiboko\Contract\Pipeline\RejectedItemException(sprintf(
                             'No replacement found for value "%s". Expected values: %s',
                              \$input,
-                              implode(', ', array_keys(\$replacements))
+                              implode(', ', \$replacements)
                           ));
                         }
 
@@ -74,7 +74,7 @@ class MapValues extends ExpressionFunction
                     throw new RejectedItemException(sprintf(
                     'No replacement found for value "%s". Expected values: %s',
                      $input,
-                      implode(', ', array_keys($replacements))
+                      implode(', ', $replacements)
                   ));
                 }
 
