@@ -28,6 +28,7 @@ class ArrayExpressionLanguageProvider implements ExpressionFunctionProviderInter
             new List_('list'),
             new FilterList('filterList'),
             new MapValues('mapValues'),
+            new NotEmpty('notEmpty')
         ];
     }
 }
