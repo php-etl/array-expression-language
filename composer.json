@@ -12,7 +12,7 @@
         "phpunit/phpunit": "^10.0",
         "phpstan/phpstan": "^2.1",
         "friendsofphp/php-cs-fixer": "^3.38",
-        "infection/infection": "^0.26",
+        "infection/infection": "^0.28",
         "rector/rector": "^2.3"
     },
     "license": "MIT",
