@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7cc01c448cae43472d3cbdc2432ff45c",
+    "content-hash": "40ef7c5173003da2e800c83b3803c768",
     "packages": [
         {
             "name": "php-etl/bucket-contracts",
@@ -2631,11 +2631,11 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "2.2.x-dev",
+            "version": "2.1.40",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/4a1379b1e4a1b0fe04ab20efc25a473a359e1e12",
-                "reference": "4a1379b1e4a1b0fe04ab20efc25a473a359e1e12",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/9b2c7aeb83a75d8680ea5e7c9b7fca88052b766b",
+                "reference": "9b2c7aeb83a75d8680ea5e7c9b7fca88052b766b",
                 "shasum": ""
             },
             "require": {
@@ -2644,7 +2644,6 @@
             "conflict": {
                 "phpstan/phpstan-shim": "*"
             },
-            "default-branch": true,
             "bin": [
                 "phpstan",
                 "phpstan.phar"
@@ -2681,7 +2680,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-03-11T13:18:18+00:00"
+            "time": "2026-02-23T15:04:35+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
