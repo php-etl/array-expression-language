@@ -17,7 +17,7 @@ final class List_ extends ExpressionFunction
         );
     }
 
-    private function compile(string $length, string $value)
+    private function compile(string $length, string $value): string
     {
         $pattern = <<<'PATTERN'
             array_fill(0, %s, %s)
@@ -26,7 +26,11 @@ final class List_ extends ExpressionFunction
         return sprintf($pattern, $length, $value);
     }
 
-    private function evaluate(array $context, int $length, $value)
+    /**
+     * @param array<string, mixed> $context
+     * @return list<mixed>
+     */
+    private function evaluate(array $context, int $length, mixed $value): array
     {
         return array_fill(0, $length, $value);
     }

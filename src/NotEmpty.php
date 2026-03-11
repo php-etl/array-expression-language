@@ -17,13 +17,14 @@ final class NotEmpty extends ExpressionFunction
         );
     }
 
-    private function compile()
+    private function compile(): string
     {
         return <<<PHP
             fn (\$carry, \$item) => \$carry && \$item !== null
             PHP;
     }
 
+    /** @param array<string, mixed> $context */
     private function evaluate(array $context, string $separator): callable
     {
         return fn ($carry, $item) => $carry && $item !== null;

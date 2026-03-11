@@ -30,6 +30,10 @@ class Map extends ExpressionFunction
         return sprintf($pattern, $iterator, $callback);
     }
 
+    /**
+     * @param array<string, mixed> $context
+     * @param iterable<array-key, mixed> $iterator
+     */
     private function evaluate(array $context, callable $callback, iterable $iterator): \Generator
     {
         foreach ($iterator as $item) {
