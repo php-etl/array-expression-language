@@ -17,7 +17,7 @@ final class Reduce extends ExpressionFunction
         );
     }
 
-    private function compile(string $iterator, string $callback, string $seed = 'null')
+    private function compile(string $iterator, string $callback, string $seed = 'null'): string
     {
         $pattern = <<<'PATTERN'
             (function($source) use ($input) {
@@ -33,7 +33,11 @@ final class Reduce extends ExpressionFunction
         return sprintf($pattern, $iterator, $callback, $seed);
     }
 
-    private function evaluate(array $context, iterable $iterator, callable $callback, mixed $seed)
+    /**
+     * @param array<string, mixed> $context
+     * @param iterable<array-key, mixed> $iterator
+     */
+    private function evaluate(array $context, iterable $iterator, callable $callback, mixed $seed): mixed
     {
         $value = $seed;
         foreach ($iterator as $item) {

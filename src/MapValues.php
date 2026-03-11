@@ -54,7 +54,13 @@ class MapValues extends ExpressionFunction
             PHP;
     }
 
-    private function evaluate(array $context, array $input, array $values)
+    /**
+     * @param array<string, mixed> $context
+     * @param array<array-key, mixed> $input
+     * @param array<string, mixed> $values
+     * @return array<array-key, mixed>
+     */
+    private function evaluate(array $context, array $input, array $values): array
     {
         $inputs = $input;
         $patterns = [];
@@ -66,21 +72,19 @@ class MapValues extends ExpressionFunction
 
         $pattern = '/^' . implode('|', $patterns) . '$/';
 
-        if (is_iterable($inputs)) {
-            foreach ($inputs as $key => $input) {
-                preg_match($pattern, (string) $input, $matches);
+        foreach ($inputs as $key => $input) {
+            preg_match($pattern, (string) $input, $matches);
 
-                if (empty($matches)) {
-                    throw new RejectedItemException(sprintf(
+            if (empty($matches)) {
+                throw new RejectedItemException(sprintf(
                     'No replacement found for value "%s". Expected values: %s',
-                     $input,
-                      implode(', ', $replacements)
-                  ));
-                }
-
-                array_shift($matches);
-                $inputs[$key] = $replacements[array_keys(array_filter($matches))[0]];
+                    $input,
+                    implode(', ', $replacements)
+                ));
             }
+
+            array_shift($matches);
+            $inputs[$key] = $replacements[array_keys(array_filter($matches))[0]];
         }
 
         return $inputs;

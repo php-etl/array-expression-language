@@ -17,7 +17,7 @@ final class Join extends ExpressionFunction
         );
     }
 
-    private function compile(string $separator)
+    private function compile(string $separator): string
     {
         $pattern = <<<'PATTERN'
             function ($item, $value) {
@@ -36,7 +36,8 @@ final class Join extends ExpressionFunction
         return sprintf($pattern, $separator);
     }
 
-    private function evaluate(array $context, string $separator)
+    /** @param array<string, mixed> $context */
+    private function evaluate(array $context, string $separator): \Closure
     {
         return function ($item, $value) use ($separator) {
             if (null === $item) {

@@ -35,7 +35,12 @@ final class FilterList extends ExpressionFunction
             PHP;
     }
 
-    private function evaluate(array $context, iterable $iterator, ?callable $callback = null)
+    /**
+     * @param array<string, mixed> $context
+     * @param iterable<array-key, mixed> $iterator
+     * @return \CallbackFilterIterator<int|string, mixed, \Traversable<int|string, mixed>>
+     */
+    private function evaluate(array $context, iterable $iterator, ?callable $callback = null): \CallbackFilterIterator
     {
         if ($iterator instanceof \IteratorAggregate) {
             $iterator = new \IteratorIterator($iterator);

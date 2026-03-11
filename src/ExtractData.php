@@ -27,6 +27,7 @@ class ExtractData extends ExpressionFunction
         return sprintf($pattern, $path);
     }
 
+    /** @param array<string, mixed> $context */
     private function evaluate(array $context, string $path): \Closure
     {
         $propertyAccessor = PropertyAccess::createPropertyAccessor();
